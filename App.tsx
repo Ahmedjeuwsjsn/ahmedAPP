@@ -1,11 +1,10 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import * as Lucide from 'lucide-react';
-import { analyzeFridgeImage, chatWithChef, generateSpeech } from './services/geminiService';
-import { playTtsAudio } from './services/audioService';
-import { Recipe, AnalysisResponse, ChatMessage } from './types';
+import { analyzeFridgeImage, chatWithChef, generateSpeech } from './services/geminiService.ts';
+import { playTtsAudio } from './services/audioService.ts';
+import { AnalysisResponse, ChatMessage } from './types.ts';
 
-// استخراج الأيقونات لضمان عملها مع ESM
 const { 
   Camera, ChefHat, MessageSquare, BookOpen, Volume2, 
   Loader2, Send, Sparkles, Search, ChevronDown, 
@@ -76,14 +75,11 @@ const App: React.FC = () => {
     const userMsg = inputMessage;
     setInputMessage('');
     setChatHistory(prev => [...prev, { role: 'user', text: userMsg }]);
-    setLoading(true);
     try {
       const botResponse = await chatWithChef(userMsg, []);
       setChatHistory(prev => [...prev, { role: 'model', text: botResponse || '' }]);
     } catch (error) {
       setChatHistory(prev => [...prev, { role: 'model', text: "الشيف شوية انشغل، اعد المحاولة عيني." }]);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -194,6 +190,7 @@ const App: React.FC = () => {
                             <p className="text-gray-800 leading-relaxed text-sm">{recipe.instructions}</p>
                           </div>
                           <div className="bg-yellow-50 p-3 rounded-xl flex gap-2 border border-yellow-100">
+                            {/* Fixed typo: iparkles -> Sparkles */}
                             <Sparkles size={16} className="text-yellow-600 shrink-0" />
                             <p className="text-yellow-800 text-xs italic">{recipe.tips}</p>
                           </div>
