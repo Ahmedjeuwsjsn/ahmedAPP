@@ -3,7 +3,6 @@ import { GoogleGenAI, Type, Modality } from "@google/genai";
 import { AnalysisResponse } from "../types.ts";
 
 export const analyzeFridgeImage = async (base64Image: string): Promise<AnalysisResponse> => {
-  // Always initialize with fresh GoogleGenAI instance using { apiKey: process.env.API_KEY }
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   
   const response = await ai.models.generateContent({
@@ -52,12 +51,10 @@ export const analyzeFridgeImage = async (base64Image: string): Promise<AnalysisR
     }
   });
 
-  // Directly access the .text property from GenerateContentResponse
   return JSON.parse(response.text || "{}") as AnalysisResponse;
 };
 
 export const chatWithChef = async (message: string, history: any[]) => {
-  // Always initialize with fresh GoogleGenAI instance using { apiKey: process.env.API_KEY }
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   const chat = ai.chats.create({
     model: 'gemini-3-flash-preview',
@@ -71,7 +68,6 @@ export const chatWithChef = async (message: string, history: any[]) => {
 };
 
 export const generateSpeech = async (text: string): Promise<string> => {
-  // Always initialize with fresh GoogleGenAI instance using { apiKey: process.env.API_KEY }
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash-preview-tts",
