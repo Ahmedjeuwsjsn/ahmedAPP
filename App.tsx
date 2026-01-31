@@ -190,7 +190,6 @@ const App: React.FC = () => {
                             <p className="text-gray-800 leading-relaxed text-sm">{recipe.instructions}</p>
                           </div>
                           <div className="bg-yellow-50 p-3 rounded-xl flex gap-2 border border-yellow-100">
-                            {/* Fixed typo: iparkles -> Sparkles */}
                             <Sparkles size={16} className="text-yellow-600 shrink-0" />
                             <p className="text-yellow-800 text-xs italic">{recipe.tips}</p>
                           </div>
